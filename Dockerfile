@@ -8,19 +8,16 @@ RUN apt-get update && apt-get install -y \
     git unzip zip libzip-dev sqlite3 \
     && docker-php-ext-install zip pdo pdo_sqlite
 
-# Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 RUN composer install --no-dev --optimize-autoloader
 
-# Create SQLite database
+# Create sqlite file
+RUN mkdir -p database
 RUN touch database/database.sqlite
 
-# Run migrations
-RUN php artisan migrate --force
+# Link storage
+RUN php artisan storage:link || true
 
-# Link storage for images
-RUN php artisan storage:link
-
-# Serve Laravel from PUBLIC folder
+# Serve from public
 CMD php -S 0.0.0.0:10000 -t public
