@@ -6,18 +6,23 @@ COPY . .
 
 RUN apt-get update && apt-get install -y \
     git unzip zip libzip-dev sqlite3 \
-    && docker-php-ext-install zip pdo pdo_sqlite
+    libxml2-dev \
+    && docker-php-ext-install \
+    pdo \
+    pdo_sqlite \
+    mbstring \
+    bcmath \
+    tokenizer \
+    xml \
+    zip
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 RUN composer install --no-dev --optimize-autoloader
 
-# Create sqlite file
 RUN mkdir -p database
 RUN touch database/database.sqlite
 
-# Link storage
 RUN php artisan storage:link || true
 
-# Serve from public
 CMD php -S 0.0.0.0:10000 -t public
