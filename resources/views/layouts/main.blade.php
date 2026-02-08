@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-<meta charset="UTF-8" />
+  <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />  <title>{{ $title ?? 'Goods Tracker' }}</title>
 @vite(['resources/css/app.css', 'resources/js/app.js'])  @livewireStyles
 
@@ -17,7 +17,9 @@ body { font-family: 'Inter', system-ui, sans-serif;
 <main class="overflow-hidden">
 @livewire('nav')
 {{ $slot }}
-</main>  @livewireScripts
+@livewire('footer')
+</main>
+@livewireScripts
 
 </body>
 </html>

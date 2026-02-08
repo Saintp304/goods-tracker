@@ -22,11 +22,24 @@ new class extends Component
           <a href="/" class="relative group text-gray-700 hover:text-indigo-700 font-medium transition {{ request()->Is('/') ? 'active-link' : '' }}">Home <span
             class="absolute left-0 bottom-[-4px] h-[4px] bg-indigo-700 rounded-lg w-0 group-hover:w-full transition-all duration-300"></span>
           </a>
-          <a href="" class="relative group text-gray-700 hover:text-indigo-700 font-medium transition {{ request()->Is('/services') ? 'active-link' : '' }}">Services
-            <span
-              class="absolute left-0 bottom-[-4px] h-[4px] bg-indigo-700 rounded-lg w-0 group-hover:w-full transition-all duration-300"></span>
-          </a>
-          <a href="#pricing" class="relative group text-gray-700 hover:text-indigo-700 font-medium transition {{ request()->Is('/about') ? 'active-link' : '' }}">About<span
+          <!-- Services Dropdown (Desktop) -->
+          <div class="relative group">
+            <button class="relative group text-gray-700 hover:text-indigo-700 font-medium transition flex items-center gap-1">
+              Services
+              <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+              <span class="absolute left-0 bottom-[-4px] h-[4px] bg-indigo-700 rounded-lg w-0 group-hover:w-full transition-all duration-300"></span>
+            </button>
+
+            <!-- Dropdown Menu -->
+            <div class="absolute left-0 top-full mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-200 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform scale-95 group-hover:scale-100 origin-top">
+              <a href="/services/1" class="block px-5 py-3 text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition">Service 1</a>
+              <a href="/services/2" class="block px-5 py-3 text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition">Service 2</a>
+              <a href="/services/3" class="block px-5 py-3 text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition">Service 3</a>
+            </div>
+          </div>
+          <a href="/about" class="relative group text-gray-700 hover:text-indigo-700 font-medium transition {{ request()->Is('about') ? 'active-link' : '' }}">About<span
             class="absolute left-0 bottom-[-4px] h-[4px] bg-indigo-700 rounded-lg w-0 group-hover:w-full transition-all duration-300"></span>
           </a>
           <a href="#support" class="relative group text-gray-700 hover:text-indigo-700 font-medium transition {{ request()->Is('/contact') ? 'active-link' : '' }}">Contact
@@ -72,17 +85,42 @@ new class extends Component
 
       <!-- Menu -->
       <ul class="menu p-0 mt-15 space-y-3">
-        <li class="">
+        <li>
           <a href="/" x-ref="link1"
             class="{{ request()->is('/') ? 'border border-white font-bold text-white' : '' }} w-50 ml-auto text-white p-4 rounded-none rounded-l-3xl">Home
           </a>
         </li>
+        <!-- Services Dropdown -->
         <li>
-          <a href="" x-ref="link2"
-            class="{{ request()->is('contestants') ? 'bg-gradient-to-b from-indigo-900/60 to-white/50 font-bold text-white' : '' }} text-white p-4 rounded-none rounded-l-3xl">Services</a>
+          <details x-ref="link2" class="group">
+            <summary
+              class="flex items-center gap-2 text-white p-4 rounded-none rounded-l-3xl cursor-pointer
+              {{ request()->is('services*') ? 'border border-white font-bold' : '' }}">
+              <span>Services</span>
+            </summary>
+
+            <!-- Dropdown -->
+            <ul class="pl-6 mt-2 space-y-2">
+              <li>
+                <a href="/services/1" class="block text-white/90 hover:text-white transition">
+                  Service 1
+                </a>
+              </li>
+              <li>
+                <a href="/services/2" class="block text-white/90 hover:text-white transition">
+                  Service 2
+                </a>
+              </li>
+              <li>
+                <a href="/services/3" class="block text-white/90 hover:text-white transition">
+                  Service 3
+                </a>
+              </li>
+            </ul>
+          </details>
         </li>
-        <li><a href="" x-ref="link3"
-          class="{{ request()->is('highlights') ? 'bg-gradient-to-b from-indigo-900/60 to-white/50 font-bold text-white' : '' }} text-white p-4 rounded-none rounded-l-3xl">About</a></li>
+        <li><a href="/about" x-ref="link3"
+          class="{{ request()->is('about') ? 'border border-white font-bold text-white' : '' }} text-white p-4 rounded-none rounded-l-3xl">About</a></li>
         <li>
           <a href="" x-ref="link4"
             class="{{ request()->is('results') ? 'bg-gradient-to-b from-indigo-900/60 to-white/50 font-bold text-white' : '' }} text-white p-4 rounded-none rounded-l-3xl">Contact
