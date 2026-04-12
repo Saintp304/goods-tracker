@@ -7,18 +7,19 @@
         <div id="hero-bg-2" class="absolute inset-0 bg-cover bg-center transition-opacity duration-[2000ms] opacity-0"></div>
       </div>
       <div class="absolute inset-0 bg-gradient-to-br from-indigo-900/70 via-indigo-800/10 to-blue-900/50"></div>
+      <div class="absolute inset-0 bg-gradient-to-br from-indigo-900/70 via-indigo-800/50 to-blue-900/50"></div>
     </div>
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <h1 class="text-[50px] md:text-6xl lg:text-7xl font-extrabold leading-tight drop-shadow-lg motion-opacity-in-0 motion-translate-y-in-150 motion-blur-in-lg motion-duration-1500">
+      <h1 class="text-[50px] md:text-6xl lg:text-7xl font-extrabold text-shadow-lg/20 leading-tight drop-shadow-lg motion-opacity-in-0 motion-translate-y-in-150 motion-blur-in-lg motion-duration-1500">
         Track Your Shipments <span class="text-indigo-500">Instantly & Accurately</span>
       </h1>
-      <p class="mt-4 text-base md:text-2xl max-w-4xl mx-auto opacity-90 motion-opacity-in-0 motion-translate-x-in-150 motion-blur-in-lg motion-duration-1500">
+      <p class="mt-4 text-base md:text-2xl text-shadow-lg/20 max-w-4xl mx-auto opacity-90 motion-opacity-in-0 motion-translate-x-in-150 motion-blur-in-lg motion-duration-1500">
         Real-time visibility for goods, cargo, and parcels worldwide — trusted by businesses and individuals across Nigeria and beyond.
       </p>
 
       <!-- Tracking Form – Professional styling -->
       <div class="mt-12 max-w-4xl mx-auto">
-        <form action="" method="GET"
+        <form action="{{ route('track') }}" method="GET"
           class="flex flex-col sm:flex-row gap-4 bg-white/95 backdrop-blur-sm p-3 rounded-2xl shadow-2xl">
 
           <input
@@ -80,7 +81,7 @@
     </div>
 
     <div class="mt-20 grid md:grid-cols-3 gap-10">
-      <div class="group bg-white p-10 rounded-2xl shadow-custome hover:shadow-2xl transition duration-300 border border-gray-100 -translate-x-1/3 intersect:translate-x-0 transition ease-out duration-1500">
+      <div class="group bg-white p-10 rounded-2xl shadow-custome hover:shadow-2xl transition duration-300 border border-gray-100 intersect-once -translate-x-1/3 intersect:translate-x-0 transition ease-out duration-1500">
         <div class="w-16 h-16 bg-indigo-100 rounded-xl flex items-center justify-center group-hover:bg-indigo-600 transition duration-300">
           <svg class="w-8 h-8 text-indigo-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
         </div>
@@ -90,7 +91,7 @@
         </p>
       </div>
 
-      <div class="group bg-white p-10 rounded-2xl shadow-custome hover:shadow-2xl transition duration-300 border border-gray-100 translate-x-1/3 intersect:translate-x-0 transition ease-out duration-1500">
+      <div class="group bg-white p-10 rounded-2xl shadow-custome hover:shadow-2xl transition duration-300 border border-gray-100 intersect-once translate-x-1/3 intersect:translate-x-0 transition ease-out duration-1500">
         <div class="w-16 h-16 bg-indigo-100 rounded-xl flex items-center justify-center group-hover:bg-indigo-600 transition duration-300">
           <svg class="w-8 h-8 text-indigo-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
         </div>
@@ -100,7 +101,7 @@
         </p>
       </div>
 
-      <div class="group bg-white p-10 rounded-2xl shadow-custome hover:shadow-2xl transition duration-300 border border-gray-100 -translate-x-1/3 intersect:translate-x-0 transition ease-out duration-1500">
+      <div class="group bg-white p-10 rounded-2xl shadow-custome hover:shadow-2xl transition duration-300 border border-gray-100 intersect-once -translate-x-1/3 intersect:translate-x-0 transition ease-out duration-1500">
         <div class="w-16 h-16 bg-indigo-100 rounded-xl flex items-center justify-center group-hover:bg-indigo-600 transition duration-300">
           <svg class="w-8 h-8 text-indigo-600 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM6 5a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
         </div>
@@ -432,7 +433,7 @@
 
     <!-- Premium Tracking Form -->
     <div class="mt-12">
-      <form action="{{ route('tracking') }}" method="GET" class="flex flex-col sm:flex-row items-center gap-4 max-w-3xl mx-auto">
+      <form action="{{ route('track') }}" method="GET" class="flex flex-col sm:flex-row items-center gap-4 max-w-3xl mx-auto">
 
         <input
         type="text"

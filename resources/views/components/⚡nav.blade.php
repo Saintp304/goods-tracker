@@ -34,9 +34,9 @@ new class extends Component
 
             <!-- Dropdown Menu -->
             <div class="absolute left-0 top-full mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-200 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform scale-95 group-hover:scale-100 origin-top">
-              <a href="/services/1" class="block px-5 py-3 text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition">Service 1</a>
-              <a href="/services/2" class="block px-5 py-3 text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition">Service 2</a>
-              <a href="/services/3" class="block px-5 py-3 text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition">Service 3</a>
+              <a href="/services/1" class="block px-5 py-3 text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition">Air Freight</a>
+              <a href="/services/2" class="block px-5 py-3 text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition">Road Transportation</a>
+              <a href="/services/3" class="block px-5 py-3 text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition">Sea Freight</a>
             </div>
           </div>
           <a href="/about" class="relative group text-gray-700 hover:text-indigo-700 font-medium transition {{ request()->Is('about') ? 'active-link' : '' }}">About<span
@@ -101,34 +101,37 @@ new class extends Component
 
             <!-- Dropdown -->
             <ul class="pl-6 mt-2 space-y-2">
-              <li>
+              <li class="border-b border-gray-300/10">
                 <a href="/services/1" class="block text-white/90 hover:text-white transition">
-                  Service 1
+                  Air Freight
                 </a>
               </li>
-              <li>
+              <li class="border-b border-gray-300/10">
                 <a href="/services/2" class="block text-white/90 hover:text-white transition">
-                  Service 2
+                  Road Transportation
                 </a>
               </li>
-              <li>
+             <li class="border-b border-gray-300/10">
                 <a href="/services/3" class="block text-white/90 hover:text-white transition">
-                  Service 3
+                  Sea Freight
                 </a>
               </li>
             </ul>
           </details>
         </li>
-        <li><a href="/about" x-ref="link3"
-          class="{{ request()->is('about') ? 'border border-white font-bold text-white' : '' }} text-white p-4 rounded-none rounded-l-3xl">About</a></li>
         <li>
-          <a href="" x-ref="link4"
-            class="{{ request()->is('results') ? 'bg-gradient-to-b from-indigo-900/60 to-white/50 font-bold text-white' : '' }} text-white p-4 rounded-none rounded-l-3xl">Contact
+          <a href="/about" x-ref="link3"
+            class="{{ request()->is('about') ? 'border border-white font-bold text-white' : '' }} text-white p-4 rounded-none rounded-l-3xl">About
+          </a>
+        </li>
+        <li>
+          <a href="/contactUs" x-ref="link4"
+            class="{{ request()->is('contactUs') ? 'border border-white font-bold text-white' : '' }} text-white p-4 rounded-none rounded-l-3xl">Contact
           </a>
         </li>
       </ul>
       <div class="flex w-[90%] mx-auto my-4 items-center space-x-6">
-        <a href="/tracking"
+        <a href="/track"
           class="bg-indigo-600 w-full text-white text-center  px-6 py-2.5 rounded-full font-semibold hover:bg-indigo-600 transition shadow-md">
           Track
         </a>
@@ -139,31 +142,35 @@ new class extends Component
 
 <style>
   .active-link span {
-  width: 100% !important;
+    width: 100% !important;
   }
 </style>
 
 
 <script>
   function drawer() {
-  return {
-  linkDelays: [100, 150, 200, 250], // top-to-bottom stagger
+    return {
+      linkDelays: [100,
+        150,
+        200,
+        250],
+      // top-to-bottom stagger
 
-  initDrawer() {
-  const checkbox = this.$refs.checkbox;
-  checkbox.addEventListener('change', () => {
-  if (checkbox.checked) {
-  // Animate links in sequence
-  for (let i = 1; i <= 4; i++) {
-  const el = this.$refs['link'+i];
-  el.classList.remove('animate-elastic-pop', `delay-${this.linkDelays[i-1]}`);
-  void el.offsetWidth; // force reflow
-  el.classList.add('animate-elastic-pop', `delay-${this.linkDelays[i-1]}`);
-  }
-  }
-  });
-  }
-  }
+      initDrawer() {
+        const checkbox = this.$refs.checkbox;
+        checkbox.addEventListener('change', () => {
+        if (checkbox.checked) {
+        // Animate links in sequence
+        for (let i = 1; i <= 4; i++) {
+        const el = this.$refs['link'+i];
+        el.classList.remove('animate-elastic-pop', `delay-${this.linkDelays[i-1]}`);
+        void el.offsetWidth; // force reflow
+        el.classList.add('animate-elastic-pop', `delay-${this.linkDelays[i-1]}`);
+        }
+        }
+        });
+      }
+    }
   }
 </script>
 
@@ -172,28 +179,31 @@ new class extends Component
 
 <script>
   function drawer() {
-  return {
-  open: false,
-  linkDelays: [100, 150, 200, 250],
-  linkClass(index) {
-  // Only animate if drawer is open
-  return this.open ? `animate-elastic-pop delay-${this.linkDelays[index-1]}`: '';
-  },
-  // Watch for open changes to reset animation
-  init() {
-  this.$watch('open', (value) => {
-  if (value) {
-  // Remove animation first to reset
-  for (let i = 1; i <= 4; i++) {
-  const el = this.$refs['link'+i];
-  el.classList.remove('animate-elastic-pop', `delay-${this.linkDelays[i-1]}`);
-  // Force reflow so animation can retrigger
-  void el.offsetWidth;
-  el.classList.add('animate-elastic-pop', `delay-${this.linkDelays[i-1]}`);
-  }
-  }
-  });
-  }
-  }
+    return {
+      open: false,
+      linkDelays: [100,
+        150,
+        200,
+        250],
+      linkClass(index) {
+        // Only animate if drawer is open
+        return this.open ? `animate-elastic-pop delay-${this.linkDelays[index-1]}`: '';
+      },
+      // Watch for open changes to reset animation
+      init() {
+        this.$watch('open', (value) => {
+        if (value) {
+        // Remove animation first to reset
+        for (let i = 1; i <= 4; i++) {
+        const el = this.$refs['link'+i];
+        el.classList.remove('animate-elastic-pop', `delay-${this.linkDelays[i-1]}`);
+        // Force reflow so animation can retrigger
+        void el.offsetWidth;
+        el.classList.add('animate-elastic-pop', `delay-${this.linkDelays[i-1]}`);
+        }
+        }
+        });
+      }
+    }
   }
 </script>
