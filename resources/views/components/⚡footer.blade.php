@@ -15,7 +15,7 @@ new class extends Component
 <div>
 <h3 class="text-white text-2xl font-bold">TrackGoods</h3>
 <p class="mt-6 text-sm">
-Next-generation real-time tracking platform — secure, fast, and built for Nigeria & global logistics.
+Next-generation real-time tracking platform — secure, fast, and built for global logistics.
 </p>
 </div>
 <div>
@@ -44,7 +44,7 @@ Next-generation real-time tracking platform — secure, fast, and built for Nige
 </div>
 </div>
 <div class="mt-16 pt-10 border-t border-gray-800 text-center text-sm">
-&copy {{ date('Y') }} TrackGoods. Built with pride in Nigeria. All rights reserved.
+&copy {{ date('Y') }} TrackGoods. Built for the global market. All rights reserved.
 </div>
 </div>
 </footer>

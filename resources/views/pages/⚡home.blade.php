@@ -45,6 +45,7 @@ class extends Component {
     .gsap-cta-content {
       opacity: 0;
     }
+
   </style>
 
   <!-- ===================== HERO ===================== -->
@@ -136,6 +137,26 @@ class extends Component {
     </div>
   </section>
 
+  <!-- ===================== TRUST BAND ===================== -->
+  <section class="py-12 bg-white border-y border-slate-100 overflow-hidden">
+    <p class="text-center text-xs font-semibold uppercase tracking-wider text-gray-400 mb-6">Trusted partners & carriers worldwide</p>
+    <div class="relative w-full overflow-hidden">
+      <div class="trust-track flex w-max">
+        <div class="shrink-0 px-8 flex items-center"><span class="text-xl font-display font-bold text-gray-400 whitespace-nowrap">DHL</span></div>
+        <div class="shrink-0 px-8 flex items-center"><span class="text-xl font-display font-bold text-gray-400 whitespace-nowrap">Maersk</span></div>
+        <div class="shrink-0 px-8 flex items-center"><span class="text-xl font-display font-bold text-gray-400 whitespace-nowrap">FedEx</span></div>
+        <div class="shrink-0 px-8 flex items-center"><span class="text-xl font-display font-bold text-gray-400 whitespace-nowrap">UPS</span></div>
+        <div class="shrink-0 px-8 flex items-center"><span class="text-xl font-display font-bold text-gray-400 whitespace-nowrap">CMA CGM</span></div>
+        <div class="shrink-0 px-8 flex items-center"><span class="text-xl font-display font-bold text-gray-400 whitespace-nowrap">Kuehne+Nagel</span></div>
+        <div class="shrink-0 px-8 flex items-center"><span class="text-xl font-display font-bold text-gray-400 whitespace-nowrap">DHL</span></div>
+        <div class="shrink-0 px-8 flex items-center"><span class="text-xl font-display font-bold text-gray-400 whitespace-nowrap">Maersk</span></div>
+        <div class="shrink-0 px-8 flex items-center"><span class="text-xl font-display font-bold text-gray-400 whitespace-nowrap">FedEx</span></div>
+        <div class="shrink-0 px-8 flex items-center"><span class="text-xl font-display font-bold text-gray-400 whitespace-nowrap">UPS</span></div>
+        <div class="shrink-0 px-8 flex items-center"><span class="text-xl font-display font-bold text-gray-400 whitespace-nowrap">CMA CGM</span></div>
+        <div class="shrink-0 px-8 flex items-center"><span class="text-xl font-display font-bold text-gray-400 whitespace-nowrap">Kuehne+Nagel</span></div>
+      </div>
+    </div>
+  </section>
   <!-- ===================== FEATURES ===================== -->
   <section id="features" class="py-24 sm:py-32 bg-white">
     <div class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10">
@@ -173,6 +194,48 @@ class extends Component {
     </div>
   </section>
 
+  <!-- ===================== SERVICES SHOWCASE ===================== -->
+  <section id="services" class="py-24 sm:py-32 bg-slate-50">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8">
+      <div class="text-center mb-14">
+        <span class="text-indigo-600 font-semibold text-sm uppercase tracking-wider">What we move, and how</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-gray-900 mt-3">Freight, your way</h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+
+        <a href="{{ route('airFreight') }}" class="gsap-service-card group relative rounded-3xl overflow-hidden h-96 block">
+          <img src="https://picsum.photos/seed/airfreight/600/800" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="Air freight" loading="lazy">
+          <div class="absolute inset-0 bg-gradient-to-t from-indigo-950/90 via-indigo-950/30 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-7">
+            <span class="text-indigo-300 font-semibold text-xs uppercase tracking-wider">Fastest</span>
+            <h3 class="font-display text-2xl font-bold text-white mt-2 mb-2">Air Freight</h3>
+            <p class="text-indigo-100/80 text-sm leading-relaxed">Time-sensitive shipments delivered across continents in days, not weeks.</p>
+          </div>
+        </a>
+
+        <a href="{{ route('roadTransport') }}" class="gsap-service-card group relative rounded-3xl overflow-hidden h-96 block">
+          <img src="https://picsum.photos/seed/roadfreight/600/800" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="Road freight" loading="lazy">
+          <div class="absolute inset-0 bg-gradient-to-t from-indigo-950/90 via-indigo-950/30 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-7">
+            <span class="text-indigo-300 font-semibold text-xs uppercase tracking-wider">Most flexible</span>
+            <h3 class="font-display text-2xl font-bold text-white mt-2 mb-2">Road Freight</h3>
+            <p class="text-indigo-100/80 text-sm leading-relaxed">Door-to-door delivery with live GPS tracking on every leg of the route.</p>
+          </div>
+        </a>
+
+        <a href="{{ route('seaFreight') }}" class="gsap-service-card group relative rounded-3xl overflow-hidden h-96 block">
+          <img src="https://picsum.photos/seed/seafreight/600/800" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="Sea freight" loading="lazy">
+          <div class="absolute inset-0 bg-gradient-to-t from-indigo-950/90 via-indigo-950/30 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-7">
+            <span class="text-indigo-300 font-semibold text-xs uppercase tracking-wider">Best value</span>
+            <h3 class="font-display text-2xl font-bold text-white mt-2 mb-2">Sea Freight</h3>
+            <p class="text-indigo-100/80 text-sm leading-relaxed">Bulk and container shipping tracked from port to port, worldwide.</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
   <!-- ===================== HOW IT WORKS (pinned scrollytelling) ===================== -->
   <section id="how" class="py-24 sm:py-32 bg-slate-50 relative">
     <div class="max-w-6xl mx-auto px-5 sm:px-8 lg:px-10">
@@ -308,27 +371,176 @@ class extends Component {
     </div>
   </section>
 
-  <!-- ===================== TESTIMONIAL ===================== -->
+  <!-- ===================== TESTIMONIALS GRID ===================== -->
   <section class="py-20 sm:py-24 bg-white">
-    <div class="gsap-testimonial max-w-4xl mx-auto px-5 sm:px-8 text-center">
-      <div class="inline-flex gap-0.5 mb-6">
-        @for ($i = 0; $i < 5; $i++)
-          <svg class="w-5 h-5 text-amber-400 fill-amber-400" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-        @endfor
+    <div class="max-w-6xl mx-auto px-5 sm:px-8">
+      <div class="text-center mb-14">
+        <span class="text-indigo-600 font-semibold text-sm uppercase tracking-wider">Trusted by businesses</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-gray-900 mt-3">What our customers say</h2>
       </div>
-      <blockquote class="font-display text-2xl sm:text-3xl font-semibold text-gray-900 leading-snug">
-        "TrackGoods changed how we handle deliveries. Our customers love the real-time updates."
-      </blockquote>
-      <div class="mt-6 flex items-center justify-center gap-3">
-        <div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold text-sm font-display">LM</div>
-        <div class="text-left">
-          <p class="text-sm font-semibold text-gray-800">Logistics Manager</p>
-          <p class="text-sm text-gray-400">Verified Business Customer</p>
+      <div class="grid sm:grid-cols-2 gap-6">
+
+        <div class="gsap-testimonial-card bg-slate-50 rounded-3xl p-8 border border-slate-100">
+          <div class="inline-flex gap-0.5 mb-4">@for ($i = 0; $i < 5; $i++)<svg class="w-4 h-4 text-amber-400 fill-amber-400" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>@endfor</div>
+          <blockquote class="font-display text-lg font-semibold text-gray-900 leading-snug mb-6">"TrackGoods changed how we handle deliveries. Our customers love the real-time updates."</blockquote>
+          <div class="flex items-center gap-3">
+            <img src="https://picsum.photos/seed/customer1/100/100" class="w-11 h-11 rounded-full object-cover" alt="Logistics Manager" loading="lazy">
+            <div class="text-left">
+              <p class="text-sm font-semibold text-gray-800">Logistics Manager</p>
+              <p class="text-sm text-gray-400">Verified Business Customer</p>
+            </div>
+          </div>
         </div>
+
+        <div class="gsap-testimonial-card bg-slate-50 rounded-3xl p-8 border border-slate-100">
+          <div class="inline-flex gap-0.5 mb-4">@for ($i = 0; $i < 5; $i++)<svg class="w-4 h-4 text-amber-400 fill-amber-400" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>@endfor</div>
+          <blockquote class="font-display text-lg font-semibold text-gray-900 leading-snug mb-6">"Customs used to be our biggest headache. Now we get notified before it even becomes a problem."</blockquote>
+          <div class="flex items-center gap-3">
+            <img src="https://picsum.photos/seed/customer2/100/100" class="w-11 h-11 rounded-full object-cover" alt="Operations Lead" loading="lazy">
+            <div class="text-left">
+              <p class="text-sm font-semibold text-gray-800">Operations Lead</p>
+              <p class="text-sm text-gray-400">Freight Forwarding Client</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gsap-testimonial-card bg-slate-50 rounded-3xl p-8 border border-slate-100">
+          <div class="inline-flex gap-0.5 mb-4">@for ($i = 0; $i < 5; $i++)<svg class="w-4 h-4 text-amber-400 fill-amber-400" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>@endfor</div>
+          <blockquote class="font-display text-lg font-semibold text-gray-900 leading-snug mb-6">"The dashboard alone saved us hours a week we used to spend chasing carriers for updates."</blockquote>
+          <div class="flex items-center gap-3">
+            <img src="https://picsum.photos/seed/customer3/100/100" class="w-11 h-11 rounded-full object-cover" alt="Warehouse Supervisor" loading="lazy">
+            <div class="text-left">
+              <p class="text-sm font-semibold text-gray-800">Warehouse Supervisor</p>
+              <p class="text-sm text-gray-400">E-commerce Retailer</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gsap-testimonial-card bg-slate-50 rounded-3xl p-8 border border-slate-100">
+          <div class="inline-flex gap-0.5 mb-4">@for ($i = 0; $i < 5; $i++)<svg class="w-4 h-4 text-amber-400 fill-amber-400" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>@endfor</div>
+          <blockquote class="font-display text-lg font-semibold text-gray-900 leading-snug mb-6">"Reliable sea freight tracking was hard to find until TrackGoods. It just works, every shipment."</blockquote>
+          <div class="flex items-center gap-3">
+            <img src="https://picsum.photos/seed/customer4/100/100" class="w-11 h-11 rounded-full object-cover" alt="Import Coordinator" loading="lazy">
+            <div class="text-left">
+              <p class="text-sm font-semibold text-gray-800">Import Coordinator</p>
+              <p class="text-sm text-gray-400">Manufacturing Client</p>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
+  <!-- ===================== PROCESS TIMELINE (horizontal scroll) ===================== -->
+  <section id="process" class="relative bg-indigo-950 overflow-hidden">
+    <div class="process-pin-wrap h-screen flex flex-col justify-center overflow-hidden">
+      <div class="px-5 sm:px-8 mb-10 text-center">
+        <span class="text-indigo-300 font-semibold text-sm uppercase tracking-wider">How your shipment moves</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mt-3">From pickup to your doorstep</h2>
+      </div>
+      <div class="process-track flex gap-8 px-[10vw] items-stretch will-change-transform">
+
+        <div class="process-card shrink-0 w-[80vw] sm:w-[420px] bg-white/5 backdrop-blur rounded-3xl p-8 border border-white/10">
+          <img src="https://picsum.photos/seed/pickup/600/400" class="rounded-2xl mb-6 w-full h-48 object-cover" alt="Pickup" loading="lazy">
+          <span class="text-indigo-300 font-semibold text-sm">Step 01</span>
+          <h3 class="font-display text-2xl font-bold text-white mt-2 mb-3">Pickup</h3>
+          <p class="text-indigo-200/80 text-sm leading-relaxed">Your shipment is collected from origin and scanned into our system, starting real-time tracking instantly.</p>
+        </div>
+
+        <div class="process-card shrink-0 w-[80vw] sm:w-[420px] bg-white/5 backdrop-blur rounded-3xl p-8 border border-white/10">
+          <img src="https://picsum.photos/seed/transit/600/400" class="rounded-2xl mb-6 w-full h-48 object-cover" alt="In transit" loading="lazy">
+          <span class="text-indigo-300 font-semibold text-sm">Step 02</span>
+          <h3 class="font-display text-2xl font-bold text-white mt-2 mb-3">In Transit</h3>
+          <p class="text-indigo-200/80 text-sm leading-relaxed">Live location updates as your goods move by air, road, or sea — visible on your dashboard at every step.</p>
+        </div>
+
+        <div class="process-card shrink-0 w-[80vw] sm:w-[420px] bg-white/5 backdrop-blur rounded-3xl p-8 border border-white/10">
+          <img src="https://picsum.photos/seed/customs/600/400" class="rounded-2xl mb-6 w-full h-48 object-cover" alt="Customs clearance" loading="lazy">
+          <span class="text-indigo-300 font-semibold text-sm">Step 03</span>
+          <h3 class="font-display text-2xl font-bold text-white mt-2 mb-3">Customs Clearance</h3>
+          <p class="text-indigo-200/80 text-sm leading-relaxed">We handle documentation and clearance, keeping you notified so there are no surprises at the border.</p>
+        </div>
+
+        <div class="process-card shrink-0 w-[80vw] sm:w-[420px] bg-white/5 backdrop-blur rounded-3xl p-8 border border-white/10">
+          <img src="https://picsum.photos/seed/delivery/600/400" class="rounded-2xl mb-6 w-full h-48 object-cover" alt="Out for delivery" loading="lazy">
+          <span class="text-indigo-300 font-semibold text-sm">Step 04</span>
+          <h3 class="font-display text-2xl font-bold text-white mt-2 mb-3">Out for Delivery</h3>
+          <p class="text-indigo-200/80 text-sm leading-relaxed">Final leg to your address, with delivery windows and driver updates sent straight to your phone.</p>
+        </div>
+
+        <div class="process-card shrink-0 w-[80vw] sm:w-[420px] bg-indigo-600 rounded-3xl p-8 border border-indigo-400/30 flex flex-col justify-center">
+          <span class="text-indigo-200 font-semibold text-sm">Step 05</span>
+          <h3 class="font-display text-2xl font-bold text-white mt-2 mb-3">Delivered</h3>
+          <p class="text-indigo-100/90 text-sm leading-relaxed">Signed, sealed, delivered — with a full timeline of your shipment's journey saved to your account.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FAQ ===================== -->
+  <section id="faq" class="py-24 sm:py-32 bg-white">
+    <div class="max-w-3xl mx-auto px-5 sm:px-8">
+      <div class="text-center mb-14">
+        <span class="text-indigo-600 font-semibold text-sm uppercase tracking-wider">Got questions?</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold text-gray-900 mt-3">Frequently asked questions</h2>
+      </div>
+      <div class="space-y-3">
+
+        <div x-data="{ open: false }" class="border border-slate-200 rounded-2xl overflow-hidden">
+          <button @click="open = !open" class="w-full flex items-center justify-between gap-4 px-6 py-5 text-left">
+            <span class="font-semibold text-gray-900">How do I track my shipment?</span>
+            <svg :class="open ? 'rotate-180' : ''" class="w-5 h-5 text-gray-400 shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div x-show="open" x-collapse class="px-6 pb-5 text-gray-500 text-sm leading-relaxed">
+            Enter your tracking number in the search bar at the top of the page. You'll see live status updates from pickup through to delivery.
+          </div>
+        </div>
+
+        <div x-data="{ open: false }" class="border border-slate-200 rounded-2xl overflow-hidden">
+          <button @click="open = !open" class="w-full flex items-center justify-between gap-4 px-6 py-5 text-left">
+            <span class="font-semibold text-gray-900">Which shipping methods do you support?</span>
+            <svg :class="open ? 'rotate-180' : ''" class="w-5 h-5 text-gray-400 shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div x-show="open" x-collapse class="px-6 pb-5 text-gray-500 text-sm leading-relaxed">
+            We track shipments across air, road, and sea freight — from single parcels to bulk container shipping.
+          </div>
+        </div>
+
+        <div x-data="{ open: false }" class="border border-slate-200 rounded-2xl overflow-hidden">
+          <button @click="open = !open" class="w-full flex items-center justify-between gap-4 px-6 py-5 text-left">
+            <span class="font-semibold text-gray-900">What happens during customs clearance?</span>
+            <svg :class="open ? 'rotate-180' : ''" class="w-5 h-5 text-gray-400 shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div x-show="open" x-collapse class="px-6 pb-5 text-gray-500 text-sm leading-relaxed">
+            We handle documentation and liaise with customs on your behalf, sending you updates so there are no surprises at the border.
+          </div>
+        </div>
+
+        <div x-data="{ open: false }" class="border border-slate-200 rounded-2xl overflow-hidden">
+          <button @click="open = !open" class="w-full flex items-center justify-between gap-4 px-6 py-5 text-left">
+            <span class="font-semibold text-gray-900">Can I get delivery notifications?</span>
+            <svg :class="open ? 'rotate-180' : ''" class="w-5 h-5 text-gray-400 shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div x-show="open" x-collapse class="px-6 pb-5 text-gray-500 text-sm leading-relaxed">
+            Yes — you can opt in to updates via WhatsApp or email at each stage of your shipment's journey.
+          </div>
+        </div>
+
+        <div x-data="{ open: false }" class="border border-slate-200 rounded-2xl overflow-hidden">
+          <button @click="open = !open" class="w-full flex items-center justify-between gap-4 px-6 py-5 text-left">
+            <span class="font-semibold text-gray-900">Do you support international shipping?</span>
+            <svg :class="open ? 'rotate-180' : ''" class="w-5 h-5 text-gray-400 shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <div x-show="open" x-collapse class="px-6 pb-5 text-gray-500 text-sm leading-relaxed">
+            Yes, we support shipments to and from most countries worldwide across all three freight types.
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
   <!-- ===================== FINAL CTA ===================== -->
   <section id="final-cta" class="relative py-20 sm:py-28 bg-gradient-to-br from-indigo-700 via-indigo-600 to-indigo-800 text-white overflow-hidden">
     <div class="gsap-cta-orb-1 absolute -top-32 -right-32 w-80 h-80 bg-white/8 rounded-full blur-3xl pointer-events-none"></div>
@@ -364,7 +576,118 @@ class extends Component {
     </div>
   </section>
 
-@script
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    if (!window.gsap || !window.ScrollTrigger) return;
+
+    gsap.to('#hero-bg-1, #hero-bg-2', {
+      yPercent: 20,
+      ease: 'none',
+      scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true }
+    });
+    gsap.to('#hero-content', {
+      yPercent: -15,
+      opacity: 0.35,
+      ease: 'none',
+      scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true }
+    });
+
+        document.querySelectorAll('.gsap-service-card').forEach((card) => {
+      gsap.fromTo(card,
+        { clipPath: 'polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)' },
+        {
+          clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+          duration: 0.9, ease: 'power3.inOut',
+          scrollTrigger: { trigger: card, start: 'top 80%' }
+        }
+      );
+    });
+
+    gsap.fromTo('.gsap-feature-card',
+      { opacity: 0, y: 60, scale: 0.9 },
+      {
+        opacity: 1, y: 0, scale: 1, stagger: 0.15, duration: 0.9, ease: 'back.out(1.4)',
+        scrollTrigger: { trigger: '#features', start: 'top 75%' }
+      }
+    );
+
+    document.querySelectorAll('.gsap-step-card').forEach((card) => {
+      gsap.fromTo(card,
+        { clipPath: 'circle(0% at 50% 50%)', opacity: 0 },
+        {
+          clipPath: 'circle(75% at 50% 50%)', opacity: 1,
+          duration: 0.9, ease: 'power3.inOut',
+          scrollTrigger: { trigger: card, start: 'top 80%' }
+        }
+      );
+    });
+
+    gsap.to('.impact-orb', {
+      y: -100,
+      ease: 'none',
+      scrollTrigger: { trigger: '#impact', start: 'top bottom', end: 'bottom top', scrub: true }
+    });
+    gsap.fromTo('.gsap-stat-card',
+      { opacity: 0, y: 50, scale: 0.85 },
+      {
+        opacity: 1, y: 0, scale: 1, stagger: 0.12, duration: 0.8, ease: 'back.out(1.5)',
+        scrollTrigger: { trigger: '#impact', start: 'top 70%' }
+      }
+    );
+    gsap.fromTo('.gsap-metric-card',
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1, y: 0, stagger: 0.15, duration: 0.7, ease: 'power2.out',
+        scrollTrigger: { trigger: '.gsap-metric-card', start: 'top 85%' }
+      }
+    );
+
+    document.querySelectorAll('.gsap-testimonial-card').forEach((card, i) => {
+      const fromLeft = i % 2 === 0;
+      gsap.fromTo(card,
+        { opacity: 0, x: fromLeft ? -60 : 60, y: 30 },
+        {
+          opacity: 1, x: 0, y: 0, duration: 0.9, ease: 'power3.out',
+          scrollTrigger: { trigger: card, start: 'top 85%' }
+        }
+      );
+    });
+
+    gsap.to('.gsap-cta-orb-1', {
+      y: -60, x: 30, ease: 'none',
+      scrollTrigger: { trigger: '#final-cta', start: 'top bottom', end: 'bottom top', scrub: true }
+    });
+    gsap.to('.gsap-cta-orb-2', {
+      y: 60, x: -30, ease: 'none',
+      scrollTrigger: { trigger: '#final-cta', start: 'top bottom', end: 'bottom top', scrub: true }
+    });
+    gsap.fromTo('.gsap-cta-content',
+      { opacity: 0, y: 50, scale: 0.95 },
+      {
+        opacity: 1, y: 0, scale: 1, duration: 1, ease: 'power3.out',
+        scrollTrigger: { trigger: '#final-cta', start: 'top 70%' }
+      }
+    );
+
+    const processTrack = document.querySelector('.process-track');
+    if (processTrack) {
+      let scrollAmount = () => processTrack.scrollWidth - window.innerWidth;
+      gsap.to(processTrack, {
+        x: () => -scrollAmount(),
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '#process',
+          start: 'top top',
+          end: () => '+=' + scrollAmount(),
+          scrub: 1,
+          pin: true,
+          invalidateOnRefresh: true
+        }
+      });
+    }
+  });
+</script>
+
 <script>
   // Hero background crossfade (unchanged, working)
   const isMobile = window.matchMedia('(max-width: 767px)').matches;
@@ -390,101 +713,4 @@ class extends Component {
     }, 7000);
   }
 </script>
-@endscript
-
-@script
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const badge = document.createElement('div');
-    badge.style.cssText = 'position:fixed;top:10px;right:10px;z-index:99999;background:#000;color:#0f0;font-family:monospace;font-size:12px;padding:8px 12px;border-radius:6px;';
-    badge.textContent = 'gsap:' + typeof window.gsap + ' ScrollTrigger:' + typeof window.ScrollTrigger;
-    document.body.appendChild(badge);
-
-    if (!window.gsap || !window.ScrollTrigger) return;
-
-    // --- Hero parallax: background drifts slower than scroll, content fades/lifts away ---
-    gsap.to('#hero-bg-1, #hero-bg-2', {
-      yPercent: 20,
-      ease: 'none',
-      scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true }
-    });
-    gsap.to('#hero-content', {
-      yPercent: -15,
-      opacity: 0.35,
-      ease: 'none',
-      scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true }
-    });
-
-    // --- Features: staggered bouncy reveal ---
-    gsap.fromTo('.gsap-feature-card',
-      { opacity: 0, y: 60, scale: 0.9 },
-      {
-        opacity: 1, y: 0, scale: 1, stagger: 0.15, duration: 0.9, ease: 'back.out(1.4)',
-        scrollTrigger: { trigger: '#features', start: 'top 75%' }
-      }
-    );
-
-    // --- How It Works: pinned scrollytelling, steps reveal as user scrolls through ---
-    gsap.timeline({
-      scrollTrigger: {
-        trigger: '#how',
-        start: 'top top',
-        end: '+=120%',
-        scrub: 1,
-        pin: true,
-      }
-    }).fromTo('.gsap-step-card',
-      { opacity: 0, y: 120, scale: 0.75 },
-      { opacity: 1, y: 0, scale: 1, stagger: 0.5, ease: 'power2.out' }
-    );
-
-    // --- Impact stats: parallax glow orb + staggered scale-in ---
-    gsap.to('.impact-orb', {
-      y: -100,
-      ease: 'none',
-      scrollTrigger: { trigger: '#impact', start: 'top bottom', end: 'bottom top', scrub: true }
-    });
-    gsap.fromTo('.gsap-stat-card',
-      { opacity: 0, y: 50, scale: 0.85 },
-      {
-        opacity: 1, y: 0, scale: 1, stagger: 0.12, duration: 0.8, ease: 'back.out(1.5)',
-        scrollTrigger: { trigger: '#impact', start: 'top 70%' }
-      }
-    );
-    gsap.fromTo('.gsap-metric-card',
-      { opacity: 0, y: 40 },
-      {
-        opacity: 1, y: 0, stagger: 0.15, duration: 0.7, ease: 'power2.out',
-        scrollTrigger: { trigger: '.gsap-metric-card', start: 'top 85%' }
-      }
-    );
-
-    // --- Testimonial: scale/fade in ---
-    gsap.fromTo('.gsap-testimonial',
-      { opacity: 0, y: 40, scale: 0.92 },
-      {
-        opacity: 1, y: 0, scale: 1, duration: 1, ease: 'power3.out',
-        scrollTrigger: { trigger: '.gsap-testimonial', start: 'top 75%' }
-      }
-    );
-
-    // --- Final CTA: parallax orbs + content reveal ---
-    gsap.to('.gsap-cta-orb-1', {
-      y: -60, x: 30, ease: 'none',
-      scrollTrigger: { trigger: '#final-cta', start: 'top bottom', end: 'bottom top', scrub: true }
-    });
-    gsap.to('.gsap-cta-orb-2', {
-      y: 60, x: -30, ease: 'none',
-      scrollTrigger: { trigger: '#final-cta', start: 'top bottom', end: 'bottom top', scrub: true }
-    });
-    gsap.fromTo('.gsap-cta-content',
-      { opacity: 0, y: 50, scale: 0.95 },
-      {
-        opacity: 1, y: 0, scale: 1, duration: 1, ease: 'power3.out',
-        scrollTrigger: { trigger: '#final-cta', start: 'top 70%' }
-      }
-    );
-  });
-</script>
-@endscript
 </div>

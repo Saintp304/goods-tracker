@@ -13,8 +13,8 @@ new class extends Component
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-16">
         <!-- Logo -->
-        <a href="/" class="text-3xl font-extrabold text-indigo-600 tracking-tight">
-          TrackGoods
+        <a href="/" class="flex items-center">
+          <img src="" alt="TrackGoods" class="h-10 w-auto">
         </a>
 
         <!-- Desktop Nav -->
