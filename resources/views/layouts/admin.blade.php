@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>{{ $title ?? 'Admin' }} — TrackGoods</title>
+<title>{{ $title ?? 'Admin' }} — {{ config('app.name') }}</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 @livewireStyles
@@ -43,7 +43,7 @@ d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 10V11"/>
 </svg>
 </div>
 <div>
-<p class="text-white font-extrabold text-base leading-tight">TrackGoods</p>
+<p class="text-white font-extrabold text-base leading-tight">{{ $settings->site_name}}</p>
 <p class="text-indigo-300 text-xs font-light">Admin Panel</p>
 </div>
 </div>

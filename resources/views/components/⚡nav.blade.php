@@ -1,10 +1,16 @@
 <?php
 
 use Livewire\Component;
+use App\Models\SiteSetting;
 
 new class extends Component
 {
-  //
+  public $settings;
+
+  public function mount(): void
+  {
+    $this->settings = SiteSetting::current();
+  }
 };
 ?>
 <div>
@@ -14,7 +20,7 @@ new class extends Component
       <div class="flex justify-between items-center h-16">
         <!-- Logo -->
         <a href="/" class="flex items-center">
-          <img src="" alt="TrackGoods" class="h-10 w-auto">
+<img src="{{ Storage::url($settings->logo_path) }}" alt="{{ $settings->site_name }}" class="h-10 w-auto">
         </a>
 
         <!-- Desktop Nav -->
@@ -111,7 +117,7 @@ new class extends Component
                   Road Transportation
                 </a>
               </li>
-             <li class="border-b border-gray-300/10">
+              <li class="border-b border-gray-300/10">
                 <a href="/services/3" class="block text-white/90 hover:text-white transition">
                   Sea Freight
                 </a>

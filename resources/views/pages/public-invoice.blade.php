@@ -3,11 +3,13 @@
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use App\Models\SiteSetting;
 use App\Models\Shipment;
 use App\Services\FinancialService;
 
 new #[Title('Invoice - TrackGoods')] #[Layout('layouts.reciept')] class extends Component
 {
+  public $settings;
   public ?Shipment $shipment = null;
   public ?\App\Models\Invoice $invoice = null;
   public float $paidAmount = 0;
@@ -17,6 +19,7 @@ new #[Title('Invoice - TrackGoods')] #[Layout('layouts.reciept')] class extends 
 
   public function mount($trackingNumber): void
   {
+    $this->settings = SiteSetting::current();
     $this->shipment = Shipment::where('tracking_number', strtoupper(trim($trackingNumber)))
     ->with('invoice')
     ->first();
@@ -96,7 +99,7 @@ new #[Title('Invoice - TrackGoods')] #[Layout('layouts.reciept')] class extends 
       <div class="bg-indigo-600 p-8 md:p-12 text-white">
         <div class="flex flex-col md:flex-row justify-between gap-8">
           <div>
-            <h1 class="text-3xl font-extrabold tracking-tight">TrackGoods</h1>
+            <img src="{{ Storage::url($settings->logo_path) }}" alt="{{ $settings->site_name }}" class="h-32 w-auto">
             <p class="text-indigo-100 text-sm mt-1 opacity-80">
               Global Logistics & Shipping Solutions
             </p>

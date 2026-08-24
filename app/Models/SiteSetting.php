@@ -6,15 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class SiteSetting extends Model
 {
-    protected $fillable = [
-        'whatsapp_number',
-        'phone',
-        'email',
-        'address',
-    ];
+  protected $fillable = [
+    'site_name',
+    'logo_path',
+    'whatsapp_number',
+    'phone',
+    'email',
+    'address',
+];
 
-    public static function current(): self
-    {
-        return static::firstOrCreate(['id' => 1]);
-    }
+  public static function current(): self
+  {
+    return static::firstOrCreate(['id' => 1]);
+  }
 }

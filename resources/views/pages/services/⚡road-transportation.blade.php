@@ -12,7 +12,7 @@ new #[Title('Road Transportation')] class extends Component
 <div class="min-h-screen bg-white">
 
   <!-- HERO -->
-  <section class="relative h-[70vh] flex items-center justify-center text-white overflow-hidden">
+  <section class="relative min-h-[92vh] md:min-h-[700px] pt-20 pb-10 flex items-center justify-center text-white overflow-hidden">
     <div class="absolute inset-0 bg-cover bg-center bg-no-repeat"
       style="background-image: url('https://images.unsplash.com/photo-1519003722875-7736bb275c6d?auto=format&fit=crop&w=1920&q=80');"></div>
     <div class="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/70 to-indigo-900/60"></div>
