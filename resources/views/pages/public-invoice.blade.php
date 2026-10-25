@@ -37,6 +37,7 @@ new #[Title('Invoice - TrackGoods')] #[Layout('layouts.reciept')] class extends 
     ->where('status', 'COMPLETED')
     ->whereHas('receipt')
     ->with('receipt')
+    ->latest('payment_date')
     ->first();
 
     $this->receiptNumber = $completedPayment?->receipt?->receipt_number;
@@ -304,11 +305,17 @@ new #[Title('Invoice - TrackGoods')] #[Layout('layouts.reciept')] class extends 
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
             </a>
           </div>
-          @elseif ($invoice->payment_type === 'instant' && $balance > 0)
+          @elseif ($shipment->status === 'held' && $invoice->payment_type === 'instant' && $balance > 0)
           <div class="mt-6 text-center">
             <a href="{{ route('track.payment', $shipment->tracking_number) }}" class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8 py-3 rounded-xl transition shadow-md">
-              Pay Now
+              Pay Now to Release
             </a>
+          </div>
+          @elseif ($shipment->status !== 'held' && $balance > 0)
+          <div class="mt-6 text-center">
+            <p class="text-sm text-gray-500 font-medium">
+              Payment opens automatically if this shipment is placed on Customs Hold
+            </p>
           </div>
           @elseif ($invoice->payment_type === 'pay_on_delivery')
           <div class="mt-6 text-center">

@@ -18,7 +18,7 @@ class AdminSeeder extends Seeder
       ['email' => 'admin@goodstrack.com'],
       [
         'name' => 'Admin',
-        'password' => Hash::make('Admin123'), // change this
+        'password' => Hash::make('TrackAdmin211'), // change this
         'is_admin' => true,
       ]
     );

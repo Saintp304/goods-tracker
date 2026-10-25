@@ -28,7 +28,13 @@ class extends Component
         $this->invoice = $shipment->invoice;
 
         if (!$this->invoice) {
-            session()->flash('error', 'No invoice exists for this shipment. Please create an invoice first.');
+            session()->flash('error', 'No invoice exists for this shipment. An invoice is created automatically when the shipment is marked as Held.');
+            $this->redirect(route('admin.shipments.edit', $shipment->id), navigate: true);
+            return;
+        }
+
+        if ($this->shipment->status !== 'held') {
+            session()->flash('error', 'Payments can only be recorded while the shipment is on Customs Hold. Change the status to Held from the Tracking tab first.');
             $this->redirect(route('admin.shipments.edit', $shipment->id), navigate: true);
             return;
         }
@@ -39,6 +45,13 @@ class extends Component
 
     public function save(FinancialService $financialService): void
     {
+        // Re-check on submit too — status could have changed between page load and save
+        if ($this->shipment->fresh()->status !== 'held') {
+            session()->flash('error', 'This shipment is no longer on Customs Hold. Payment was not recorded.');
+            $this->redirect(route('admin.shipments.edit', $this->shipment->id), navigate: true);
+            return;
+        }
+
         $this->validate([
             'amount' => 'required|numeric|min:0.01',
             'payment_date' => 'required|date',
@@ -56,10 +69,8 @@ class extends Component
             'transaction_reference' => $this->transaction_reference,
         ];
 
-        // 1. Record the payment (initially PENDING)
         $payment = $financialService->recordPayment($this->invoice, $data);
 
-        // 2. If status is COMPLETED, finalize it via service to generate receipt
         if ($this->status === 'COMPLETED') {
             try {
                 $financialService->completePayment($payment);
@@ -68,7 +79,6 @@ class extends Component
                 return;
             }
         } else {
-            // Update status manually if not COMPLETED (since recordPayment defaults to PENDING)
             $payment->status = $this->status;
             $payment->save();
             $financialService->updateInvoicePaymentStatus($this->invoice);
@@ -82,30 +92,37 @@ class extends Component
 
 <div class="max-w-3xl mx-auto space-y-6 pb-12">
     <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-        <div class="p-6 border-b border-gray-100 flex justify-between items-center">
-            <div>
-                <h1 class="text-2xl font-bold text-gray-900">Record Payment</h1>
-                <p class="text-sm text-gray-500 font-mono">Shipment: {{ $shipment->tracking_number }} | Invoice: {{ $invoice->invoice_number }}</p>
+        <div class="p-4 sm:p-6 border-b border-gray-100 flex flex-row justify-between items-start gap-3">
+            <div class="min-w-0">
+                <h1 class="text-lg sm:text-2xl font-bold text-gray-900">Record Payment</h1>
+                <p class="text-xs sm:text-sm text-gray-500 font-mono truncate">Shipment: {{ $shipment->tracking_number }} | Invoice: {{ $invoice->invoice_number }}</p>
             </div>
             <a href="{{ route('admin.shipments.edit', $shipment->id) }}" wire:navigate
-                class="text-sm font-semibold text-gray-600 hover:text-gray-900 transition">
+                class="shrink-0 text-sm font-semibold text-gray-600 hover:text-gray-900 transition px-3 py-1.5 rounded-lg hover:bg-gray-50">
                 Cancel
             </a>
         </div>
 
-        <div class="p-6 space-y-6">
-            <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-100 flex justify-between items-center">
+        <div class="p-4 sm:p-6 space-y-6">
+            <div class="bg-red-50 p-4 rounded-xl border border-red-100 flex items-center gap-3">
+                <svg class="w-5 h-5 text-red-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/>
+                </svg>
+                <p class="text-xs text-red-700 font-semibold">This shipment is on Customs Hold — recording a payment here reflects toward its release.</p>
+            </div>
+
+            <div class="bg-indigo-50 p-4 rounded-xl border border-indigo-100 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
                 <span class="text-sm font-medium text-indigo-600">Invoice Total: {{ $invoice->currency }} {{ number_format($invoice->total, 2) }}</span>
                 <span class="text-sm font-bold text-indigo-700">Balance: {{ $invoice->currency }} {{ number_format($invoice->total - $invoice->payments()->where('status', 'COMPLETED')->sum('amount'), 2) }}</span>
             </div>
 
-            <div class="grid sm:grid-cols-2 gap-6">
+            <div class="grid sm:grid-cols-2 gap-4 sm:gap-6">
                 <div class="sm:col-span-2">
                     <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Amount to Pay</label>
                     <div class="relative">
                         <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 font-medium">{{ $invoice->currency }}</span>
                         <input type="number" step="0.01" wire:model="amount"
-                            class="w-full pl-12 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none text-black placeholder-gray-400 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100" />
+                            class="w-full pl-14 pr-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none text-black placeholder-gray-400 focus:border-indigo-400 focus:ring-2 focus:ring-indigo-100" />
                     </div>
                     @error('amount') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
                 </div>
@@ -126,7 +143,7 @@ class extends Component
                     </select>
                     @error('status') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
                 </div>
-                <div class="sm:col-span-2 grid sm:grid-cols-2 gap-6">
+                <div class="sm:col-span-2 grid sm:grid-cols-2 gap-4 sm:gap-6">
                     <div>
                         <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Payment Type</label>
                         <select wire:model="payment_type"
@@ -158,7 +175,7 @@ class extends Component
 
             <div class="pt-6 border-t border-gray-100 flex justify-end">
                 <button wire:click="save" wire:loading.attr="disabled"
-                    class="px-8 py-3 rounded-xl text-white text-sm font-bold transition hover:-translate-y-0.5 shadow-md"
+                    class="w-full sm:w-auto px-8 py-3 rounded-xl text-white text-sm font-bold transition hover:-translate-y-0.5 shadow-md"
                     style="background: linear-gradient(135deg, #4f46e5, #3730a3);">
                     <span wire:loading.remove wire:target="save">Record Payment</span>
                     <span wire:loading wire:target="save">Processing...</span>

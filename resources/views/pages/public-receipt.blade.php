@@ -4,6 +4,7 @@ use Livewire\Component;
 use Livewire\Attributes\Layout;
 use App\Models\Receipt;
 use App\Models\Payment;
+use App\Models\SiteSetting;
 
 new #[Layout('layouts.reciept')] class extends Component
 {
@@ -127,29 +128,62 @@ new #[Layout('layouts.reciept')] class extends Component
             </div>
           </div>
 
-          <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100 text-center">
-            <p class="text-xs uppercase tracking-widest text-gray-400 font-bold mb-2">
-              Amount Paid
-            </p>
-            <p class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-indigo-600 font-mono break-all">
-              {{ $payment->invoice->currency }} {{ number_format($payment->amount, 2) }}
-            </p>
-            <div class="mt-4 inline-block px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold uppercase tracking-wider">
-              Payment Completed
-            </div>
-          </div>
+<div class="bg-gray-50 rounded-2xl p-6 border border-gray-100 text-center">
+    <p class="text-xs uppercase tracking-widest text-gray-400 font-bold mb-2">
+        Total Amount Paid
+    </p>
+
+    @php
+        $invoiceTotal = (float) $payment->invoice->total;
+
+        $totalPaid = (float) \App\Models\Payment::where('invoice_id', $payment->invoice_id)
+            ->where('status', 'COMPLETED')
+            ->sum('amount');
+
+        $remainingBalance = max(0, $invoiceTotal - $totalPaid);
+
+        $isFullyPaid = $remainingBalance <= 0.01;
+    @endphp
+
+    <p class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-indigo-600 font-mono break-all">
+        {{ $payment->invoice->currency }}
+        {{ number_format($totalPaid, 2) }}
+    </p>
+
+    @if ($isFullyPaid)
+        <div class="mt-4 inline-block px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold uppercase tracking-wider">
+            Payment Completed
         </div>
 
-        <div class="text-center border-t border-gray-100 pt-8">
-          <p class="text-gray-400 text-sm mb-1">
-            Thank you for your payment!
-          </p>
-          <p class="text-gray-500 text-xs">
-            This is an electronically generated receipt and does not require a physical signature.
-          </p>
+        <p class="mt-2 text-xs text-gray-500">
+            Invoice fully paid
+        </p>
+    @else
+        <div class="mt-4 inline-block px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-bold uppercase tracking-wider">
+            Partial Payment
+        </div>
+
+        <p class="mt-2 text-xs text-gray-500">
+            Remaining balance:
+            <span class="font-semibold text-gray-700">
+                {{ $payment->invoice->currency }}
+                {{ number_format($remainingBalance, 2) }}
+            </span>
+        </p>
+    @endif
+</div>
+          </div>
+
+          <div class="text-center border-t border-gray-100 pt-8">
+            <p class="text-gray-400 text-sm mb-1">
+              Thank you for your payment!
+            </p>
+            <p class="text-gray-500 text-xs">
+              This is an electronically generated receipt and does not require a physical signature.
+            </p>
+          </div>
         </div>
       </div>
     </div>
+    @endif
   </div>
-  @endif
-</div>

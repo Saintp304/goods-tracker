@@ -13,6 +13,36 @@ use Illuminate\Support\Str;
 class FinancialService
 {
     /**
+     * Create or update the invoice tied to a customs hold.
+     * This is the ONLY place an invoice gets created now — shipments
+     * start with no invoice, and one only appears once a hold amount is set.
+     */
+    public function createOrUpdateHoldInvoice(Shipment $shipment, float $amount, string $currency = 'USD'): Invoice
+    {
+        return DB::transaction(function () use ($shipment, $amount, $currency) {
+            $invoice = $shipment->invoice()->first();
+
+            if (!$invoice) {
+                $invoice = new Invoice();
+                $invoice->invoice_number = 'INV-' . strtoupper(Str::random(10));
+                $invoice->shipment_id = $shipment->id;
+                $invoice->issue_date = Carbon::now()->toDateString();
+                $invoice->due_date = Carbon::now()->addDays(7)->toDateString();
+                $invoice->status = 'OPEN';
+            }
+
+            $invoice->currency = $currency;
+            $invoice->subtotal = $amount;
+            $invoice->tax = $invoice->tax ?? 0;
+            $invoice->total = round($amount + ($invoice->tax ?? 0), 2);
+            $invoice->payment_type = $shipment->payment_type ?? 'instant';
+            $invoice->save();
+
+            return $invoice;
+        });
+    }
+
+    /**
      * Create a new invoice for a shipment.
      */
     public function createInvoice(Shipment $shipment, array $data): Invoice
@@ -80,30 +110,24 @@ class FinancialService
             $invoice = $payment->invoice;
             $amount = $payment->amount;
 
-            // Check for overpayment
             $remainingBalance = $this->calculateRemainingBalance($invoice);
             if ($amount > $remainingBalance) {
                 throw new \Exception("Payment amount exceeds remaining balance of {$invoice->currency} {$remainingBalance}");
             }
 
-            // Mark payment as completed
             $payment->status = 'COMPLETED';
             $payment->save();
 
-            // Generate receipt
             $receipt = $this->generateReceipt($payment);
 
-            // Update invoice status
             $this->updateInvoicePaymentStatus($invoice);
 
-            // Send confirmation email
             try {
                 if ($invoice->shipment->receiver_email) {
                     \Illuminate\Support\Facades\Mail::to($invoice->shipment->receiver_email)
                         ->send(new \App\Mail\PaymentConfirmed($payment, $invoice->shipment));
                 }
             } catch (\Exception $e) {
-                // Log email failure but don't roll back transaction
                 error_log("Payment confirmation email failed: " . $e->getMessage());
             }
 

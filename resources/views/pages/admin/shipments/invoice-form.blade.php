@@ -71,23 +71,23 @@ class extends Component
 };
 ?>
 
-<div class="max-w-3xl mx-auto space-y-6 pb-12">
+<div class="max-w-3xl mx-auto space-y-6 pb-28 lg:pb-12">
     <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-        <div class="p-6 border-b border-gray-100 flex justify-between items-center">
-            <div>
-                <h1 class="text-2xl font-bold text-gray-900">
+        <div class="p-4 sm:p-6 border-b border-gray-100 flex flex-row justify-between items-start gap-3">
+            <div class="min-w-0">
+                <h1 class="text-lg sm:text-2xl font-bold text-gray-900">
                     {{ $invoice ? 'Edit Invoice' : 'Create Invoice' }}
                 </h1>
-                <p class="text-sm text-gray-500 font-mono">Shipment: {{ $shipment->tracking_number }}</p>
+                <p class="text-xs sm:text-sm text-gray-500 font-mono truncate">Shipment: {{ $shipment->tracking_number }}</p>
             </div>
             <a href="{{ route('admin.shipments.edit', $shipment->id) }}" wire:navigate
-                class="text-sm font-semibold text-gray-600 hover:text-gray-900 transition">
+                class="shrink-0 text-sm font-semibold text-gray-600 hover:text-gray-900 transition px-3 py-1.5 rounded-lg hover:bg-gray-50">
                 Cancel
             </a>
         </div>
 
-        <div class="p-6 space-y-6">
-            <div class="grid sm:grid-cols-2 gap-6">
+        <div class="p-4 sm:p-6 space-y-6">
+            <div class="grid sm:grid-cols-2 gap-4 sm:gap-6">
                 <div>
                     <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Issue Date</label>
                     <input type="date" wire:model="issue_date"
@@ -102,7 +102,7 @@ class extends Component
                 </div>
             </div>
 
-            <div class="grid sm:grid-cols-3 gap-6">
+            <div class="grid sm:grid-cols-3 gap-4 sm:gap-6">
                 <div>
                     <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Currency</label>
                     <select wire:model="currency"
@@ -137,18 +137,29 @@ class extends Component
                 </div>
             </div>
 
-            <div class="pt-6 border-t border-gray-100 flex justify-between items-center">
-                <div class="text-right">
+            {{-- Total + Save: stacked full-width on mobile, side-by-side on desktop --}}
+            <div class="pt-6 border-t border-gray-100 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+                <div class="text-left sm:text-right">
                     <p class="text-xs text-gray-500 uppercase font-bold">Total Amount</p>
-                    <p class="text-2xl font-bold text-gray-900">{{ $currency }} {{ number_format(round($subtotal + $tax, 2), 2) }}</p>
+                    <p class="text-xl sm:text-2xl font-bold text-gray-900">{{ $currency }} {{ number_format(round($subtotal + $tax, 2), 2) }}</p>
                 </div>
                 <button wire:click="save" wire:loading.attr="disabled"
-                    class="px-8 py-3 rounded-xl text-white text-sm font-bold transition hover:-translate-y-0.5 shadow-md"
+                    class="hidden sm:inline-flex px-8 py-3 rounded-xl text-white text-sm font-bold transition hover:-translate-y-0.5 shadow-md"
                     style="background: linear-gradient(135deg, #4f46e5, #3730a3);">
                     <span wire:loading.remove wire:target="save">Save Invoice</span>
                     <span wire:loading wire:target="save">Saving...</span>
                 </button>
             </div>
         </div>
+    </div>
+
+    {{-- Sticky mobile save bar --}}
+    <div class="sm:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-100 shadow-[0_-4px_12px_rgba(0,0,0,0.05)] p-3 z-30">
+        <button wire:click="save" wire:loading.attr="disabled"
+            class="w-full py-3 rounded-xl text-white text-sm font-bold transition shadow-md"
+            style="background: linear-gradient(135deg, #4f46e5, #3730a3);">
+            <span wire:loading.remove wire:target="save">Save Invoice</span>
+            <span wire:loading wire:target="save">Saving...</span>
+        </button>
     </div>
 </div>

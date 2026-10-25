@@ -1,13 +1,17 @@
 <?php
 
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use App\Models\Shipment;
 use App\Models\Invoice;
 use App\Models\PaymentSetting;
 use App\Services\FinancialService;
 use Illuminate\Support\Facades\Storage;
 
-new class extends Component {
+new class extends Component 
+{
+use WithFileUploads;
+
   public string $trackingNumber;
   public ?Shipment $shipment = null;
   public ?Invoice $invoice = null;
@@ -185,9 +189,9 @@ new class extends Component {
               wire:click="$set('selectedSettingId', {{ $method['id'] }})"
               class="px-4 py-2 rounded-full text-sm font-semibold transition {{ (int) $selectedSettingId === (int) $method['id'] ? 'bg-indigo-600 text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200' }}">
               @if ($method['method'] === 'crypto')
-                {{ $method['crypto_currency'] }} ({{ $method['crypto_network'] }})
+              {{ $method['crypto_currency'] }} ({{ $method['crypto_network'] }})
               @else
-                {{ ucfirst(str_replace('_', ' ', $method['method'])) }}
+              {{ ucfirst(str_replace('_', ' ', $method['method'])) }}
               @endif
             </button>
             @endforeach
@@ -312,7 +316,7 @@ new class extends Component {
             After completing your payment externally, please provide the details below to speed up the verification process.
           </p>
 
-          <form wire:submit.prevent="submitPayment" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <form wire:submit.prevent="submitPayment" class="text-black grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label class="block text-sm font-semibold text-gray-700 mb-2">Payment Method</label>
               <select wire:model="payment_details.payment_method" class="w-full p-3 border border-gray-200 rounded-xl text-sm focus:ring-indigo-500 focus:border-indigo-500">

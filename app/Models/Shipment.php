@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Services\FinancialService;
 
 class Shipment extends Model
 {
@@ -37,7 +36,9 @@ class Shipment extends Model
     'eta' => 'date',
   ];
 
-  // Auto-generate tracking number and create invoice
+  // Auto-generate tracking number only. No invoice is created here —
+  // shipments now start with zero financials. An invoice is only created
+  // once the shipment is placed on Held (see FinancialService::createOrUpdateHoldInvoice).
   protected static function booted(): void
   {
     static::creating(function ($shipment) {
@@ -45,73 +46,58 @@ class Shipment extends Model
         $shipment->tracking_number = 'TG-' . strtoupper(uniqid());
       }
     });
+  }
 
-    static::created(function ($shipment) {
-      // Auto-create invoice when shipment is created
-      try {
-        // Check if invoice already exists to prevent duplicates
-        $existingInvoice = $shipment->invoice()->first();
-        if (!$existingInvoice) {
-          // Calculate invoice data based on shipment's configured currency and charges
-          $invoiceData = [
-            'invoice_number' => 'INV-' . strtoupper(uniqid()),
-            'issue_date' => now()->toDateString(),
-            'due_date' => now()->addDays(14)->toDateString(),
-            'currency' => $shipment->currency ?? 'USD',
-            'subtotal' => $shipment->subtotal ?? 0,
-            'tax' => $shipment->tax ?? 0,
-            'total' => ($shipment->subtotal ?? 0) + ($shipment->tax ?? 0),
-            'status' => 'OPEN',
-          ];
-
-          $financialService = app(FinancialService::class);
-          $financialService->createInvoice($shipment, $invoiceData);
-
-          // Sync payment type to the newly created invoice
-          $invoice = $shipment->invoice()->first();
-          if ($invoice && $shipment->payment_type) {
-              $invoice->payment_type = $shipment->payment_type;
-              $invoice->save();
-          }
-
-          // Invoice created successfully
-        }
-      } catch (\Exception $e) {
-        // Log error but don't fail shipment creation
-        error_log("Failed to auto-create invoice for shipment {$shipment->tracking_number}: " . $e->getMessage());
-      }
-    });
+  /**
+  * Whether this shipment is currently on customs hold.
+  */
+  public function isOnHold(): bool
+  {
+    return $this->status === 'held';
   }
 
   public function getStepsAttribute(): array
   {
+    // Held is intentionally NOT its own step level — it sits at the same
+    // level as "in_transit" so the ladder never appears to move backward.
     $steps = [
       'pending' => 1,
       'picked_up' => 2,
       'in_transit' => 3,
-      'held' => 4,
+      'held' => 3,
+      'cleared_transit' => 4,
       'delivered' => 5,
       'cancelled' => 0,
     ];
 
     $currentLevel = $steps[$this->status] ?? 0;
 
-    return [
+    $timeline = [
       ['label' => 'Order Confirmed', 'done' => $currentLevel >= 1],
       ['label' => 'Picked by Courier', 'done' => $currentLevel >= 2],
-      ['label' => 'On the Way', 'done' => $currentLevel >= 3],
-      ['label' => 'Customs Hold', 'done' => $this->status === 'held'],
-      ['label' => 'Delivered', 'done' => $this->status === 'delivered'],
+      ['label' => 'In Transit', 'done' => $currentLevel >= 3],
     ];
+
+    // Show a "Customs Hold" step in the ladder only while actually held.
+    if ($this->status === 'held') {
+      $timeline[] = ['label' => 'Customs Hold',
+        'done' => true,
+        'flag' => true];
+    }
+
+    $timeline[] = ['label' => 'Cleared & Moving',
+      'done' => $currentLevel >= 4];
+    $timeline[] = ['label' => 'Delivered',
+      'done' => $currentLevel >= 5];
+
+    return $timeline;
   }
 
-  public function histories()
-  {
+  public function histories() {
     return $this->hasMany(ShipmentHistory::class)->latest();
   }
 
-  public function invoice()
-  {
+  public function invoice() {
     return $this->hasOne(Invoice::class);
   }
 }

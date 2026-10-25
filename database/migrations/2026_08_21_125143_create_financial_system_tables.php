@@ -22,6 +22,7 @@ return new class extends Migration
             $table->decimal('tax', 15, 2)->default(0);
             $table->decimal('total', 15, 2);
             $table->string('status')->default('OPEN'); // OPEN, PARTIALLY_PAID, PAID, CANCELLED
+$table->string('payment_type')->default('instant'); // instant, pay_on_delivery
             $table->timestamps();
         });
 
